@@ -56,15 +56,17 @@
  },
  "dependencies": {
   "@cardfunc/model": "0.0.45",
-  "@cogneco/mend": "^1.7.15",
-  "@typeup/dom": "^0.2.10",
-  "@typeup/parser": "^0.2.10",
-  "@typeup/renderer": "0.2.20",
-  "commander": "^4.1.1"
+  "authly": "0.0.34",
+  "dotenv": "^8.2.0",
+  "commander": "^4.1.1",
+  "gracely": "0.0.24",
+  "isoly": "0.0.11",
+  "node-fetch": "^2.6.0"
  },
  "devDependencies": {
   "@types/jest": "^25.1.2",
   "@types/node": "^13.7.1",
+  "@types/node-fetch": "^2.5.4",
   "babel-core": "^6.26.3",
   "babel-jest": "^25.1.0",
   "jest": "^25",
