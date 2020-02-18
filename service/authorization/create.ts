@@ -60,34 +60,6 @@ export async function create(key: authly.Token, numberInput: string, input: any[
 	return result
 }
 
-export function createErrorReference(numberInput: string): gracely.Error {
+function createErrorReference(numberInput: string): gracely.Error {
 	return gracely.client.malformedContent("number", "string", numberInput)
-}
-
-async function createFromReference(key: authly.Token, input: any[]): Promise<model.Authorization | authly.Token | gracely.Error> {
-	let result: model.Authorization | gracely.Error
-	const inputOk = input && verifier && await verifier.verify(key) && AuthorizationInput.is(AuthorizationInput.objectify(input))
-	if (!inputOk || (input.length != 4))
-		result = gracely.client.malformedContent("reference", "authly.Token", "Input must be string[4].")
-	else {
-		result = {
-			number: undefined,
-			"card": {
-				"id": input[0],
-				"scheme": "visa",
-				"iin": input[1].slice(0, 5),
-				"last4": input[1].slice((input[1].length - 4), (input[1].length)),
-				"expires": [
-					Number.parseInt(input[2]) as model.Card.Expires.Month,
-					Number.parseInt(input[3]) as model.Card.Expires.Year,
-				]
-			},
-			id: authly.Identifier.generate(8),
-			reference: "",
-			created: isoly.DateTime.now(),
-			refund: [],
-			capture: [],
-		}
-	}
-	return result
 }

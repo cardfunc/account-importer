@@ -9,82 +9,15 @@ import * as gracely from "gracely"
 import * as isoly from "isoly"
 import * as fs from 'fs'
 
-
-function commaSeparatedList(value: string, dummyPrevious: string) {
-	return value.split(/[ ,]+/).filter(Boolean)
-}
-
-function listOfJSON(value: string, dummyPrevious: string) {
-	return value.match(/({[0-9a-z ":,]+})+/gi)
-}
-
 function fileNames(value: string, dummyPrevious: string) {
 	return value.split(" ").filter(Boolean)
 }
 
 commander.option("-t, --test <input>", "Write something to echo")
-commander.option("-l, --addlist [<input>]", "import an authorization", commaSeparatedList)
-commander.option("-j, --addjson <input>", "import an authorization")
-commander.option("-a, --addjsonlist [<input>]", "import several json authorizations", listOfJSON)
 commander.option("-f, --addjsonfile, <items>", "import a json list of cards from a file, specify input filename and output filefolder within one pair of quotation marks (Example parameters: -f \"input.txt output/\")", fileNames)
 
 commander.parse(process.argv)
 
-const testKey = ""
-
-if (commander.test !== undefined)
-	console.log("Testing: ", commander.test)
-if (commander.addlist !== undefined) {
-	const input: string[] = commander.addlist
-	if (input.length == 4) {
-		console.log("accepted indata for: ", input)
-		authorization.create(testKey, input[0], input).then((testAuth) => {
-			if (model.Authorization.is(testAuth))
-				console.log("Input could be created: ", testAuth)
-			else
-				console.log("Input could not be created: ", testAuth)
-		})
-	}
-	else
-		console.log("Input requires 4 values: ", input)
-}
-if (commander.addjson !== undefined) {
-	console.log("account for: ", commander.addjson)
-	const inputObject: any = JSON.parse(commander.addjson)
-	inputObject.month = Number.parseInt(inputObject.month) as model.Card.Expires.Month
-	inputObject.year = Number.parseInt(inputObject.year) as model.Card.Expires.Year
-	const input: AuthorizationInput = inputObject
-	console.log("input (json): ", input)
-	if (input && AuthorizationInput.is(input)) {
-		authorization.create(testKey, input.number, input).then((testAuth) => {
-			if (model.Authorization.is(testAuth))
-				console.log("Input could be created: ", testAuth)
-			else
-				console.log("Input could not be created: ", testAuth)
-		})
-	}
-	else
-		console.log("Input is supposed to be of type authorizationInput")
-}
-if (commander.addjsonlist !== undefined) {
-	commander.addjsonlist.forEach((element: any) => {
-		const inputObject: any = JSON.parse(element)
-		inputObject.month = Number.parseInt(inputObject.month) as model.Card.Expires.Month
-		inputObject.year = Number.parseInt(inputObject.year) as model.Card.Expires.Year
-		const input: AuthorizationInput = inputObject
-		console.log("input (json): ", input)
-		if (input && AuthorizationInput.is(input)) {
-			authorization.create(testKey, input.number, input).then((testAuth) => {
-				if (model.Authorization.is(testAuth))
-					console.log("Input could be created: ", testAuth)
-				else
-					console.log("Input could not be created: ", testAuth)
-			})
-		}
-		else
-			console.log("Input is supposed to be of type authorizationInput")
-	})
-}
 if (commander.addjsonfile !== undefined) {
 	if (commander.addjsonfile.length == 2) {
 		fs.readFile(commander.addjsonfile[0], async (error, data) => {
