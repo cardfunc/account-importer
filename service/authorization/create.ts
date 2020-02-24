@@ -2,7 +2,6 @@ import { default as fetch } from "node-fetch"
 import * as authly from "authly"
 import * as model from "@cardfunc/model"
 import * as gracely from "gracely"
-import * as isoly from "isoly"
 import { AuthorizationInput } from "../../model/AuthorizationInput"
 
 const verifier = authly.Verifier.create("public")
