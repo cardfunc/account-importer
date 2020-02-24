@@ -5,7 +5,6 @@ import * as gracely from "gracely"
 import * as isoly from "isoly"
 import { AuthorizationInput } from "../../model/AuthorizationInput"
 
-
 const verifier = authly.Verifier.create("public")
 
 export async function create(key: authly.Token, numberInput: string, input: any[] | AuthorizationInput): Promise<model.Authorization | authly.Token | gracely.Error> {
