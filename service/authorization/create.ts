@@ -6,7 +6,7 @@ import { AuthorizationInput } from "../../model/AuthorizationInput"
 
 const verifier = authly.Verifier.create("public")
 
-export async function create(key: authly.Token, numberInput: string, input: any[] | AuthorizationInput): Promise<model.Authorization | authly.Token | gracely.Error> {
+export async function create(key: authly.Token, numberInput: string, input: any[] | AuthorizationInput): Promise<string | model.Authorization | authly.Token | gracely.Error> {
 	let result: model.Authorization | authly.Token | gracely.Error
 	const authorizationKey = authly.Token.is(key) && verifier && await verifier.verify(key) || undefined
 	const data = AuthorizationInput.is(input) ? input : AuthorizationInput.objectify(input)
@@ -23,10 +23,10 @@ export async function create(key: authly.Token, numberInput: string, input: any[
 					data.month,
 					data.year,
 				],
-				csc: "xxx",
+				csc: data.csc,
 			},
 			account: "create",
-			pares: "<insert correct pares here>",
+			pares: data.pares,
 		}
 		const response = await fetch(authorizationKey.iss + "/authorization", {
 			method: "POST",
