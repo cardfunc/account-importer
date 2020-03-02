@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+.npmrc
+database/data/authorization.json
+output
+test.txt
+local.settings.json
