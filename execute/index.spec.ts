@@ -5,8 +5,11 @@ import * as isoly from "isoly"
 import * as execute from "../execute"
 import * as fs from "fs"
 
-describe.skip("test-import", () => {
-	it("fileimport", async () => {
+describe("test-import", () => {
+	it("test all", async () => {
+		await execute.executeCommands(["test3.txt", "output/"])
+	})
+	it.skip("fileimport", async () => {
 			if (process.env.accountImporterApiKeySecret && process.env.testInputFile && process.env.testOutputFolder) {
 				const folder = process.env.testOutputFolder
 				const timeStamp = isoly.DateTime.localize(isoly.DateTime.parse(isoly.DateTime.now()), "sv")

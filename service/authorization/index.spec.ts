@@ -2,10 +2,11 @@ import * as dotenv from "dotenv"
 dotenv.config()
 
 import { create } from "./create"
+import { AccountInput } from "../../model/AccountInput"
 
-describe.skip("test-create", () => {
+describe("test-create", () => {
 	it("create test", async () => {
-		expect(await create(process.env.accountImporterApiKeySecret ? process.env.accountImporterApiKeySecret : "", "test", { "number": "abcd", "pan": "411111111111", "month": 5, "year": 24, "csc": "987", "pares": "an.example.pares" })).toEqual(
+		expect(await create(process.env.authorizationApiKeySecret ? process.env.authorizationApiKeySecret : "", "test", { "number": "abcd", "pan": "411111111111", "month": 5, "year": 24, "csc": "987", "pares": "an.example.pares" })).toEqual(
 			{
 				"id": expect.any(String),
 				"number": "import-abcd",
@@ -26,5 +27,8 @@ describe.skip("test-create", () => {
 				"created": expect.any(String),
 			}
 		)
+	})
+	it("create test", async () => {
+		expect(AccountInput.is(await create(process.env.authorizationApiKeySecret ? process.env.authorizationApiKeySecret : "", "test", { "number": "abcd", "pan": "411111111111", "month": 5, "year": 24, "csc": "987", "pares": "an.example.pares" })))
 	})
 })
