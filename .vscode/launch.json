@@ -13,6 +13,10 @@
 					],
 					"program": "${workspaceFolder}/dist/index.js",
 					"preLaunchTask": "build",
+					"args": [
+						"-f",
+						"test3.json output/"
+					],
 					"outFiles": [
 							"${workspaceFolder}/dist/**/*.js"
 					]

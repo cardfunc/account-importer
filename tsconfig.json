@@ -3,7 +3,6 @@
 	"compilerOptions": {
 		"declaration": true,
 		"sourceMap": true,
-		"sourceRoot": "../",
 		"outDir": "dist"
 	},
 	"files": [

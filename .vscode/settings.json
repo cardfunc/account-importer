@@ -1,8 +1,8 @@
 {
 	"files.exclude": {
-		".*": true,
-		"*.json": true,
-		"dist": true,
+		".*": false,
+		"*.json": false,
+		"dist": false,
 		"node_modules": true,
 		"README.md": true,
 		"LICENSE": true
